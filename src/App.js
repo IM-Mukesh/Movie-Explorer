@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import MovieDetail from "./pages/MovieDetail";
+import "./App.css";
+const App = () => {
+  const [currentView, setCurrentView] = useState("home");
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
 
-function App() {
+  const handleMovieClick = (movieId) => {
+    setSelectedMovieId(movieId);
+    setCurrentView("detail");
+  };
+
+  const handleBackToHome = () => {
+    setCurrentView("home");
+    setSelectedMovieId(null);
+  };
+
+  const renderCurrentView = () => {
+    switch (currentView) {
+      case "detail":
+        return (
+          <MovieDetail
+            movieId={selectedMovieId}
+            onBackToHome={handleBackToHome}
+          />
+        );
+      default:
+        return <Home onMovieClick={handleMovieClick} />;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header onNavigateHome={handleBackToHome} />
+      <main className="main">{renderCurrentView()}</main>
+
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
