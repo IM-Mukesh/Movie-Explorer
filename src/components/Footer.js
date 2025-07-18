@@ -49,14 +49,14 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="footer-column">
+        {/* <div className="footer-column">
           <h4>Contact</h4>
           <ul>
             <li>Email: vivekj8800@gmail.com</li>
             <li>Phone: +91-9407857477</li>
             <li>Location: India</li>
           </ul>
-        </div>
+        </div> */}
       </div>
 
       <div className="footer-bottom">
